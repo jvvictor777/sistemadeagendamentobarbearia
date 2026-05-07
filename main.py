@@ -1,3 +1,5 @@
+#Gerencia uma agenda diária (lista com horários fixos). O usuário escolhe um horário e o sistema marca como "Ocupado".
+
 import os
 
 def limpar():
@@ -20,6 +22,11 @@ def menu1():
     print("")
     print("=============================")
 
+def horarios():
+    horario = {
+        
+    }
+
 limpar()
 while True:
     titulo1()
@@ -28,6 +35,7 @@ while True:
     try:
         opcao = input("Digite a sua opção: ")
     except:
+        limpar()
         print("Erro!!")
         continue
 
@@ -44,6 +52,7 @@ while True:
         print("Obrigado pela sua preferecia!!")
         break
 
-    else: 
+    else:
+        limpar()
         print("Opção invalida!!")
         continue
