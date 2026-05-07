@@ -26,7 +26,7 @@ while True:
     menu1()
     
     try:
-        opcao = int(input("Digite a sua opção: "))
+        opcao = input("Digite a sua opção: ")
     except:
         print("Erro!!")
         continue
