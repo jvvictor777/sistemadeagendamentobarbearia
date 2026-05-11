@@ -17,28 +17,44 @@ def menu1():
     print("============ MENU ============")
     print("")
     print("[1]: Ver Horarios disponiveis.")
-    print("[2]: Marcar Horario.")
+    print("[2]: Visão geral de horarios.")
+    print("[3]: Marcar Horario.")
     print("[0]: Sair.")
     print("")
     print("=============================")
 
 def agendaH():
     while True:
-
-        escolha = input("Escolha seu hórario: ")
-
-        if horario[escolha] == "Disponivel":
-            horario[escolha] = "Oculpado"
-            print("horario agendado")
-            break
-
-        elif horario[escolha] == "Oculpado":
-            print("Horario ocupado.")
-            continue
         
-        else:
-            print("Horario invalido.")
+        try:
+            escolha = input("Escolha seu hórario: ")
+
+            if horario[escolha] == "Disponivel":
+                horario[escolha] = "Ocupado"
+                print("horario agendado")
+                break
+
+            elif horario[escolha] == "Ocupado":
+                print("Horario ocupado.")
+                continue
+            
+            elif horario[escolha] == "Horario de Almoco":
+                print("a escravidão foi abolida faz um tempo")
+                continue
+
+            elif horario[escolha] == "Fechado":
+                print("a escravidão foi abolida faz um tempo")
+                continue
+
+            else:
+                print("Horario invalido.")
+                continue
+        
+        except KeyError:
+            print("Erro!!")
             continue
+
+
 
 horario = {
     "08:00": "Disponivel",
@@ -90,6 +106,30 @@ while True:
         print(f"[1]  Agenda horario", end= ". " )
         print("[2] Voltar ao menu.")
 
+        while True:   
+            
+            opcao1 = input("Opção: ")
+            
+            if opcao1 == "1":
+                agendaH()
+                break
+
+            elif opcao1 == "2":
+                limpar()
+                break
+
+            else:
+                print("Opção invalida.")
+
+    
+    elif opcao == "2":
+        limpar()
+        for hora,status in horario.items():
+            print(hora, status)
+        
+        print(f"[1]  Agenda horario", end= ". " )
+        print("[2] Voltar ao menu.")
+
         while True:
 
             opcao1 = input("Opção: ")
@@ -106,7 +146,8 @@ while True:
                 print("Opção invalida.")
 
     
-    elif opcao == '2':
+
+    elif opcao == '3':
         limpar()
         agendaH()
 
