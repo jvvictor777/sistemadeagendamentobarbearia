@@ -1,5 +1,11 @@
 import os
 
+opcao = 0
+
+clientes = []
+agendas = []
+horarios = []
+
 def limpar():
     os.system ("cls" if os.name == "nt" else 'clear')
 
@@ -14,76 +20,12 @@ def titulo1():
 def menu1():
     print("============ MENU ============")
     print("")
-    print("[1]: Ver Horarios disponiveis.")
-    print("[2]: Visão geral de horarios.")
-    print("[3]: Marcar Horario.")
+    print("[1]: Cliente.")
+    print("[2]: Agenda.")
+    print("[3]: Horario.")
     print("[0]: Sair.")
     print("")
     print("=============================")
-
-def agendaH():
-    while True:
-        
-        try:
-            escolha = input("Escolha seu hórario: ")
-
-            if horario[escolha] == "Disponivel":
-                horario[escolha] = "Ocupado"
-                limpar()
-                print("horario agendado")
-                break
-
-            elif horario[escolha] == "Ocupado":
-                print("Horario ocupado.")
-                continue
-            
-            elif horario[escolha] == "Horario de Almoco":
-                print("a escravidão foi abolida faz um tempo")
-                continue
-
-            elif horario[escolha] == "Fechado":
-                print("a escravidão foi abolida faz um tempo")
-                continue
-
-            else:
-                print("Horario invalido.")
-                continue
-        
-        except KeyError:
-            print("Erro!!")
-            continue
-
-
-
-horario = {
-    "08:00": "Disponivel",
-    "08:30": "Disponivel",
-    "09:00": "Disponivel",
-    "09:30": "Disponivel",
-    "10:00": "Disponivel",
-    "10:30": "Disponivel",
-    "11:00": "Disponivel",
-    "11:30": "Disponivel",
-    "12:00": "Disponivel",
-    "12:30": "Disponivel",
-    "13:00": "Disponivel",
-    "13:30": "Horario de Almoco",
-    "14:00": "Disponivel",
-    "14:30": "Disponivel",
-    "15:00": "Disponivel",
-    "15:30": "Disponivel",
-    "16:00": "Disponivel",
-    "16:30": "Disponivel",
-    "17:00": "Disponivel",
-    "17:30": "Disponivel",
-    "18:00": "Disponivel",
-    "18:30": "Disponivel",
-    "19:00": "Disponivel",
-    "19:30": "Disponivel",
-    "20:00": "Disponivel",
-    "20:30": "Disponivel",
-    "21:00": "Fechado"
-}
 
 limpar()
 while True:
@@ -94,56 +36,15 @@ while True:
 
     if opcao == "1":
         limpar()
-        for hora,status in horario.items():
-            if status == "Disponivel":
-                print(hora, "Disponivel")
-        print(f"[1]  Agenda horario", end= ". " )
-        print("[2] Voltar ao menu.")
-
-        while True:   
-            
-            opcao1 = input("Opção: ")
-            
-            if opcao1 == "1":
-                agendaH()
-                break
-
-            elif opcao1 == "2":
-                limpar()
-                break
-
-            else:
-                print("Opção invalida.")
-
+        pass
     
     elif opcao == "2":
         limpar()
-        for hora,status in horario.items():
-            print(hora, status)
-        
-        print(f"[1]  Agenda horario", end= ". " )
-        print("[2] Voltar ao menu.")
-
-        while True:
-
-            opcao1 = input("Opção: ")
-
-            if opcao1 == "1":
-                agendaH()
-                break
-
-            elif opcao1 == "2":
-                limpar()
-                break
-
-            else:
-                print("Opção invalida.")
-
-    
+        pass
 
     elif opcao == '3':
         limpar()
-        agendaH()
+        pass
 
     elif opcao == '0':
         limpar()
