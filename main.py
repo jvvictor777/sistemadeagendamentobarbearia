@@ -3,8 +3,11 @@ import os
 opcao = 0
 
 clientes = []
-agendas = []
 horarios = []
+agenda = []
+
+def entre():
+    input("Pressione ENTRE para continuar...")
 
 def limpar():
     os.system ("cls" if os.name == "nt" else 'clear')
@@ -17,58 +20,83 @@ def titulo():
     print("| |_/ / (_| | |  | |_) |  __/ (_| | |  | | (_| | /\__/ / (_| | | | | || (_| | | |_/ / (_| | |  | |_) | (_| | | | (_| |")
     print("\____/ \__,_|_|  |_.__/ \___|\__,_|_|  |_|\__,_| \____/ \__,_|_| |_|\__\__,_| \____/ \__,_|_|  |_.__/ \__,_|_|  \__,_|")
 
-def menu_principal():
-    print("============ Cliente ============")
-    print("")
-    print("[1]: Cliente.")
-    print("[2]: Horario.")
-    print("[3]: Agenda.")
-    print("[0]: Sair.")
-    print("")
-    print("================================")
+def menu(menu, opcoes = True):
+    global opcao
 
-def menu_cliente():
-    print("============ Cliente ============")
-    print("")
-    print("[1]: Adicionar clinte.")
-    print("[2]: Ver cliente.")
-    print("[0]: Voltar.")
-    print("")
-    print("================================")
+    if (menu == "principal"):
+        titulo()
+        print("\n============ Menu ============\n")
+        print("[1]: Cliente.")
+        print("[2]: Horario.")
+        print("[3]: Agenda.")
+        print("[0]: Sair.\n")
+        print("==============================")
 
-def menu_horario():
-    print("============ Horario ============")
-    print("")
-    print("[1]: Ver horarios disponiveis.")
-    print("[2]: Ver horarios oculpados.")
-    print("[3]: Ver visão geral de horarios.")
-    print("[0]: Sair.")
-    print("")
-    print("================================")
+    elif (menu == "cliente"):
+        titulo()
+        print("\n============ Cliente ============\n")
+        print("[1]: Adicionar clinte.")
+        print("[2]: Ver cliente.")
+        print("[0]: Voltar.\n")
+        print("================================")
 
-def agendar():
-    print("Sistema para agendar horario aqui.")
+    elif (menu == "horario"):
+        titulo()
+        print("\n============ Horario ============\n")
+        print("[1]: Ver horarios disponiveis.")
+        print("[2]: Ver horarios oculpados.")
+        print("[3]: Ver visão geral de horarios.")
+        print("[0]: Sair.\n")
+        print("================================")
+
+    else:
+        pass
+
+    if opcoes:
+        opcao = input("Digite a sua opção: ")
+
+def cadastra(tipo):
+    if (tipo == "cliente"):
+        codigo = len(clientes) +1
+        nome = input("Digite o nome do cliente: ")
+        email = input("Digite o e-mail do cliente: ")
+        clientes.append([codigo, nome, email])
+
+    else: 
+        pass
+
+def listas(tipo):
+    if (tipo == "cliente"):
+        for cliente in clientes:
+            print(f"user{cliente[0]} -  {cliente[1]} - {cliente[2]}")
+
+    else:
+        pass
 
 limpar()
 while True:
-    titulo()
-    menu_principal()
-
-    opcao = input("Digite a sua opção: ")
+    menu("principal")
 
     if opcao == "1":
         limpar()
-        menu_cliente() 
+        menu("cliente") 
 
         while True:
-            opcao = input("Digite a sua opção: ")
-
             if opcao == "1":
-                pass
+                limpar()
+                cadastra('cliente')
+                limpar()
                 break
 
             elif opcao == "2":
-                pass
+                limpar()
+                listas('cliente')
+                entre()
+                limpar()
+                break
+
+            elif opcao == "0":
+                limpar()
                 break
 
             else:
@@ -78,24 +106,35 @@ while True:
     
     elif opcao == "2":
         limpar()
-        menu_horario()
+        menu("horario")
 
         while True: 
-            opcao = input("Digite a sua opção: ")
-            break
         
             if opcao == "1":
+                limpar()
                 print("Ver horarios dispoiniveis aqui.")
+                entre()
+                limpar()
                 break
             
             elif opcao == "2":
+                limpar()
                 print("Ver horarios oculpados aqui.")
+                entre()
+                limpar()
                 break
 
             elif opcao == "3":
+                limpar()
                 print("Ver todos os horarios .")
+                entre()
+                limpar()
                 break
 
+            elif opcao == "0":
+                limpar()
+                break
+                
             else: 
                 print("Opção invalida!!")
                 continue
@@ -103,8 +142,8 @@ while True:
             
 
     elif opcao == '3':
+        pass
         limpar()
-        agendar()
 
     elif opcao == '0':
         limpar()
