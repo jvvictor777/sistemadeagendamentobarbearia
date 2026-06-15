@@ -2,10 +2,10 @@ import os
 
 opcao = 0
 
-#clientes = []
-clientes = [[1, "João", "João@gmail"], [2, "João1", "João1@gmail"], [1, "João2", "João2@gmail"], [1, "João3", "João3@gmail"]]
-#horarios = []
-horarios = [[1, "08:00"], [2, "08:30"], [3, "09:00"], [4, "09:30"]]
+clientes = []
+#clientes = [[1, "João", "João@gmail"], [2, "João1", "João1@gmail"], [1, "João2", "João2@gmail"], [1, "João3", "João3@gmail"]]
+horarios = []
+#horarios = [[1, "08:00"], [2, "08:30"], [3, "09:00"], [4, "09:30"]]
 
 agenda = []
 
@@ -80,10 +80,24 @@ def cadastra(tipo):
         horarios.append([codigo, horario])
 
     elif (tipo == "agenda"):
+
+        ocupado = False
+
         codigo = len(agenda) +1
-        cliente = input("Digite o Codigo do cliente: ")
-        horario = input("Digite o codigo do horario: ")
-        agenda.append([codigo, cliente, horario])
+        cliente = int(input("Digite o Codigo do cliente: "))
+        horario = int(input("Digite o codigo do horario: "))
+
+        for agendamento in agenda:
+            if agendamento[2] == horario:
+                ocupado = True
+                break
+        
+        if ocupado:
+            print("Horario já oculpado...")
+            entre()
+
+        else:
+            agenda.append([codigo, cliente, horario])
 
 
     else: 
