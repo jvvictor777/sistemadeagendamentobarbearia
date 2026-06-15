@@ -2,8 +2,11 @@ import os
 
 opcao = 0
 
-clientes = []
-horarios = []
+#clientes = []
+clientes = [[1, "João", "João@gmail"], [2, "João1", "João1@gmail"], [1, "João2", "João2@gmail"], [1, "João3", "João3@gmail"]]
+#horarios = []
+horarios = [[1, "08:00"], [2, "08:30"], [3, "09:00"], [4, "09:30"]]
+
 agenda = []
 
 def entre():
@@ -43,11 +46,19 @@ def menu(menu, opcoes = True):
     elif (menu == "horario"):
         titulo()
         print("\n============ Horario ============\n")
-        print("[1]: Ver horarios disponiveis.")
-        print("[2]: Ver horarios oculpados.")
-        print("[3]: Ver visão geral de horarios.")
+        print("[1]: Adicionar horario.")
+        print("[2]: Ver horarios.")
         print("[0]: Sair.\n")
         print("================================")
+
+    elif (menu == "agenda"):
+        titulo()
+        print("\n============ Agenda ============\n")
+        print("[1]: Agendar horario.")
+        print("[2]: Ver horarios agendados.")
+        print("[0]: Sair.\n")
+        print("================================")
+
 
     else:
         pass
@@ -56,11 +67,24 @@ def menu(menu, opcoes = True):
         opcao = input("Digite a sua opção: ")
 
 def cadastra(tipo):
+    global qhorario
     if (tipo == "cliente"):
         codigo = len(clientes) +1
         nome = input("Digite o nome do cliente: ")
         email = input("Digite o e-mail do cliente: ")
         clientes.append([codigo, nome, email])
+
+    elif (tipo == "horario"):
+        codigo = len(horarios) +1
+        horario = input("Digite o novo horario: ")
+        horarios.append([codigo, horario])
+
+    elif (tipo == "agenda"):
+        codigo = len(agenda) +1
+        cliente = input("Digite o Codigo do cliente: ")
+        horario = input("Digite o codigo do horario: ")
+        agenda.append([codigo, cliente, horario])
+
 
     else: 
         pass
@@ -69,6 +93,14 @@ def listas(tipo):
     if (tipo == "cliente"):
         for cliente in clientes:
             print(f"user{cliente[0]} -  {cliente[1]} - {cliente[2]}")
+
+    elif (tipo == "horario"):
+        for horario in horarios:
+            print(f"Codigo {horario[0]} - {horario[1]}")
+    
+    elif (tipo == "agenda"):
+        for agendar in agenda:
+            print(f"Vaga {agendar[0]} - Cliente {clientes[agendar[1]-1][1]} - Horario {horarios[agendar[2]-1][1]}")
 
     else:
         pass
@@ -112,21 +144,13 @@ while True:
         
             if opcao == "1":
                 limpar()
-                print("Ver horarios dispoiniveis aqui.")
-                entre()
+                cadastra("horario")
                 limpar()
                 break
             
             elif opcao == "2":
                 limpar()
-                print("Ver horarios oculpados aqui.")
-                entre()
-                limpar()
-                break
-
-            elif opcao == "3":
-                limpar()
-                print("Ver todos os horarios .")
+                listas("horario")
                 entre()
                 limpar()
                 break
@@ -142,7 +166,23 @@ while True:
             
 
     elif opcao == '3':
-        pass
+        limpar()
+        menu("agenda")
+
+        while True:
+            if opcao == "1":
+                limpar()
+                cadastra("agenda")
+                limpar()
+                break
+
+            elif opcao == "2":
+                limpar()
+                listas("agenda")
+                entre()
+                limpar()
+                break
+        
         limpar()
 
     elif opcao == '0':
