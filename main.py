@@ -1,207 +1,201 @@
-import os
+import os 
 
 opcao = 0
-
 clientes = []
 horarios = []
 agenda = []
 
 def entre():
-    input("Pressione ENTRE para continuar...")
+    input("Digite ENTRE para continuar...")
 
 def limpar():
-    os.system ("cls" if os.name == "nt" else 'clear')
+    os.system("cls" if os.name == "nt" else "clear")
 
 def titulo():
-    print("______            _                     _         _____             _         ______            _                     ")
-    print("| ___ \          | |                   (_)       /  ___|           | |        | ___ \          | |                    ")
-    print("| |_/ / __ _ _ __| |__   ___  __ _ _ __ _  __ _  \ `--.  __ _ _ __ | |_ __ _  | |_/ / __ _ _ __| |__   __ _ _ __ __ _ ")
-    print("| ___ \/ _` | '__| '_ \ / _ \/ _` | '__| |/ _` |  `--. \/ _` | '_ \| __/ _` | | ___ \/ _` | '__| '_ \ / _` | '__/ _` |")
-    print("| |_/ / (_| | |  | |_) |  __/ (_| | |  | | (_| | /\__/ / (_| | | | | || (_| | | |_/ / (_| | |  | |_) | (_| | | | (_| |")
-    print("\____/ \__,_|_|  |_.__/ \___|\__,_|_|  |_|\__,_| \____/ \__,_|_| |_|\__\__,_| \____/ \__,_|_|  |_.__/ \__,_|_|  \__,_|")
+    print(""" 
+    ______            _                     _         _____             _         ______            _                     
+    | ___ \          | |                   (_)       /  ___|           | |        | ___ \          | |                    
+    | |_/ / __ _ _ __| |__   ___  __ _ _ __ _  __ _  \ `--.  __ _ _ __ | |_ __ _  | |_/ / __ _ _ __| |__   __ _ _ __ __ _ 
+    | ___ \/ _` | '__| '_ \ / _ \/ _` | '__| |/ _` |  `--. \/ _` | '_ \| __/ _` | | ___ \/ _` | '__| '_ \ / _` | '__/ _` |
+    | |_/ / (_| | |  | |_) |  __/ (_| | |  | | (_| | /\__/ / (_| | | | | || (_| | | |_/ / (_| | |  | |_) | (_| | | | (_| |
+    \____/ \__,_|_|  |_.__/ \___|\__,_|_|  |_|\__,_| \____/ \__,_|_| |_|\__\__,_| \____/ \__,_|_|  |_.__/ \__,_|_|  \__,_|                                                                                                                  
+    """)
 
-def menu(menu, opcoes = True):
+def menu(tipo, opcoes = True):
     global opcao
 
-    if (menu == "principal"):
+    linha = "===================\n"
+
+    if (tipo == "principal"):
+        limpar()
         titulo()
-        print("\n============ Menu ============\n")
-        print("[1]: Cliente.")
-        print("[2]: Horario.")
-        print("[3]: Agenda.")
-        print("[0]: Sair.\n")
-        print("==============================")
+        print(linha)
+        print("[1] - Clientes.")
+        print("[2] - Horarios.")
+        print("[3] - Agendar.")
+        print("[0] - Sair.\n")
+        print(linha)
 
-    elif (menu == "cliente"):
+    elif(tipo == "clientes"):
+        limpar()
         titulo()
-        print("\n============ Cliente ============\n")
-        print("[1]: Adicionar clinte.")
-        print("[2]: Ver cliente.")
-        print("[0]: Voltar.\n")
-        print("================================")
+        print(linha)
+        print("[1] - Adcionar Clinte.")
+        print("[2] - Ver Clintes.")
+        print("[0] - Voltar.\n")
+        print(linha)
 
-    elif (menu == "horario"):
+    elif(tipo == "horario"):
+        limpar()
         titulo()
-        print("\n============ Horario ============\n")
-        print("[1]: Adicionar horario.")
-        print("[2]: Ver horarios.")
-        print("[0]: Sair.\n")
-        print("================================")
+        print(linha)
+        print("[1] - Adcionar horario.")
+        print("[2] - Ver Horarios.")
+        print("[0] - Voltar.\n")
+        print(linha)
 
-    elif (menu == "agenda"):
+    elif(tipo == "agenda"):
+        limpar()
         titulo()
-        print("\n============ Agenda ============\n")
-        print("[1]: Agendar horario.")
-        print("[2]: Ver horarios agendados.")
-        print("[0]: Sair.\n")
-        print("================================")
-
-
-    else:
-        pass
+        print(linha)
+        print("[1] - Agendar horario.")
+        print("[2] - Ver horarios Agendado")
+        print("[0] - Voltar.\n")
+        print(linha)
 
     if opcoes:
         opcao = input("Digite a sua opção: ")
 
-def cadastra(tipo):
-    global qhorario
-    if (tipo == "cliente"):
+def add(tipo):
+
+    if tipo == "clientes":
         codigo = len(clientes) +1
-        nome = input("Digite o nome do cliente: ")
-        email = input("Digite o e-mail do cliente: ")
+        nome = input("Digite o nome do Clinte: ")
+        email = input("Digite o email do Clinte: ")
         clientes.append([codigo, nome, email])
 
-    elif (tipo == "horario"):
+    elif tipo == "horarios":
         codigo = len(horarios) +1
-        horario = input("Digite o novo horario: ")
+        horario = input("Digite o horario: ")
         horarios.append([codigo, horario])
 
-    elif (tipo == "agenda"):
-
+    elif tipo == "agendar":
         ocupado = False
-
         codigo = len(agenda) +1
-        cliente = int(input("Digite o Codigo do cliente: "))
-        horario = int(input("Digite o codigo do horario: "))
-
-        for agendamento in agenda:
-            if agendamento[2] == horario:
-                ocupado = True
-                break
+        lista("clientes")
+        idcliente = int(input("\nDigite o Codigo do cliente: "))
+        print("")
+        lista("horarios")
+        idhorario = int(input("\nDigite o Codigo do horario: "))
         
-        if ocupado:
-            print("Horario já oculpado...")
+        for agendamento in agenda:
+            if agendamento[2] == idhorario:
+                ocupado = True
+
+        if ocupado: 
+            print("Horario já ocupado.")
+            entre()
+    
+        else:
+            agenda.append([codigo, idcliente, idhorario])
+            print("\nhorario agendado.\n")
             entre()
 
-        else:
-            agenda.append([codigo, cliente, horario])
-
-
-    else: 
-        pass
-
-def listas(tipo):
-    if (tipo == "cliente"):
-        for cliente in clientes:
-            print(f"user{cliente[0]} -  {cliente[1]} - {cliente[2]}")
-
-    elif (tipo == "horario"):
-        for horario in horarios:
-            print(f"Codigo {horario[0]} - {horario[1]}")
+def lista(tipo):
     
-    elif (tipo == "agenda"):
+    if tipo == "clientes":
+        for cliente in clientes:
+            print(f"Codigo: {cliente[0]} - Nome: {cliente[1]} - Email: {cliente[2]}")
+    elif tipo == "horarios":
+        for horario in horarios:
+            print(f"Codigo: {horario[0]} - Horario: {horario[1]}")
+    elif tipo == "agendar":
         for agendar in agenda:
-            print(f"Vaga {agendar[0]} - Cliente {clientes[agendar[1]-1][1]} - Horario {horarios[agendar[2]-1][1]}")
+            print(f"Codifo: {agendar[0]} - clinte: {clientes[agendar[1]-1][1]} - Horario: {horarios[agendar[2]-1][1]}")
 
-    else:
-        pass
 
-limpar()
 while True:
     menu("principal")
 
     if opcao == "1":
-        limpar()
-        menu("cliente") 
-
         while True:
+            menu("clientes")
+            
             if opcao == "1":
                 limpar()
-                cadastra('cliente')
-                limpar()
-                break
+                titulo()
+                add("clientes")
+                print("\nClinte adcionado.\n")
+                entre()
 
             elif opcao == "2":
                 limpar()
-                listas('cliente')
+                lista("clientes")
                 entre()
-                limpar()
-                break
 
             elif opcao == "0":
-                limpar()
                 break
 
             else:
-                print("Opção invalida!!")
-                continue
-                
-    
-    elif opcao == "2":
-        limpar()
-        menu("horario")
-
-        while True: 
-        
-            if opcao == "1":
-                limpar()
-                cadastra("horario")
-                limpar()
-                break
-            
-            elif opcao == "2":
-                limpar()
-                listas("horario")
+                print("Erro...")
                 entre()
                 limpar()
-                break
+                continue
+
+    elif opcao == '2':
+        while True:
+            menu("horario")
+
+            if opcao == "1":
+                limpar()
+                titulo()
+                add("horarios")
+                print("\nhorario adcionado.\n")
+                entre()
+
+            elif opcao == "2":
+                limpar()
+                lista("horarios")
+                entre()
+
 
             elif opcao == "0":
-                limpar()
                 break
-                
-            else: 
-                print("Opção invalida!!")
+
+            else:
+                print("Erro...")
+                entre()
+                limpar()
                 continue
 
-            
+
 
     elif opcao == '3':
-        limpar()
-        menu("agenda")
-
         while True:
+            menu("agenda")
+
             if opcao == "1":
                 limpar()
-                cadastra("agenda")
-                limpar()
-                break
+                titulo()
+                add("agendar")
+
 
             elif opcao == "2":
                 limpar()
-                listas("agenda")
+                lista("agendar")
+                entre()
+
+            elif opcao == "0":
+                break
+
+            else:
+                print("Erro...")
                 entre()
                 limpar()
-                break
-        
-        limpar()
+                continue
 
-    elif opcao == '0':
+
+    elif opcao == "0":
         limpar()
         print("Programa sendo finalizando...")
         break
-
-    else:
-        limpar()
-        print("Opção invalida!!")
-        continue
